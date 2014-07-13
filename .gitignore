@@ -44,5 +44,7 @@ nbproject
 ########################
 config/local.js
 
-# use assets as a compilation target for ember-cli
+
+# ignore top level assets because its a build directory, but include ember's static assets folder
 assets
+!ui/public/assets
