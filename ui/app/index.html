@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SimplyKanban</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{BASE_TAG}}
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/simply-kanban.css">
+  </head>
+  <body>
+    <script>
+      window.SimplyKanbanENV = {{ENV}};
+      window.EmberENV = window.SimplyKanbanENV.EmberENV;
+    </script>
+    <script src="assets/vendor.js"></script>
+    <script src="assets/simply-kanban.js"></script>
+    <script>
+      window.SimplyKanban = require('simply-kanban/app')['default'].create(SimplyKanbanENV.APP);
+    </script>
+  </body>
+</html>
