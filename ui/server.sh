@@ -1,0 +1,1 @@
+ember server --output-path="../assets"

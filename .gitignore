@@ -43,3 +43,6 @@ nbproject
 # local config
 ########################
 config/local.js
+
+# use assets as a compilation target for ember-cli
+assets
