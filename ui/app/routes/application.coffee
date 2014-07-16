@@ -2,6 +2,8 @@
 
 ApplicationRoute = Ember.Route.extend
     beforeModel: ->
-        console.log 'application route beforeModel hook'
+        @session.confirmSession().then ({user, authenticated}) =>
+            if not authenticated
+                @transitionTo 'login'
 
 `export default ApplicationRoute`
