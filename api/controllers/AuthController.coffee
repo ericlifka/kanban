@@ -11,7 +11,7 @@ AuthController =
         password = req.param 'password'
 
         if not username or not password
-            return res.json MISSING_PARAM, 402
+            return res.json MISSING_PARAM, 400
 
         User.findOne {username}, (err, user) ->
             if not user

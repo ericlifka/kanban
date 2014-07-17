@@ -5,4 +5,7 @@ LoginRoute = Ember.Route.extend
         register: ->
             @transitionTo 'register'
 
+        authenticated: ->
+            @transitionTo 'index'
+
 `export default LoginRoute`

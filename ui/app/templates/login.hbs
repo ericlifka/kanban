@@ -4,12 +4,23 @@
             <small>Login</small>
         </h1>
 
-        <form role="form" class="form-horizontal">
+        <form {{bind-attr class=":form-horizontal loginError:has-error"}} {{action "login" on="submit"}}>
+
+            {{#if loginError}}
+                <div class="form-group">
+                    <label class="col-sm-5 control-label"></label>
+
+                    <div class="col-sm-7">
+                        <p class="form-control-static">{{loginError}}</p>
+                    </div>
+                </div>
+            {{/if}}
+
             <div class="form-group">
                 <label for="username" class="col-sm-5 control-label">Username</label>
 
                 <div class="col-sm-7">
-                    <input type="text" class="form-control" id="username" placeholder="username">
+                    {{input type="text" class="form-control" id="username" placeholder="username" value=username}}
                 </div>
             </div>
 
@@ -17,7 +28,7 @@
                 <label for="password" class="col-sm-5 control-label">Password</label>
 
                 <div class="col-sm-7">
-                    <input type="password" class="form-control" id="password" placeholder="password">
+                    {{input type="password" class="form-control" id="password" placeholder="password" value=password}}
                 </div>
             </div>
 
