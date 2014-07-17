@@ -43,6 +43,8 @@ AuthController =
                     if err
                         res.json CREATE_FAILED(err), 500
                     else
+                        req.session.authenticated = true
+                        req.session.user = user
                         res.json user, 201
 
 module.exports = AuthController

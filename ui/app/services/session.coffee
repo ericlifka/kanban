@@ -14,9 +14,15 @@ SessionService = Ember.Object.extend
 
                 resolve response
 
-    login: (username, password) -> new Ember.RSVP.Promise (resolve) =>
+    login: (username, password) ->
+        @authRequest '/auth/login', username, password
+
+    register: (username, password) ->
+        @authRequest '/auth/register', username, password
+
+    authRequest: (endpoint, username, password) -> new Ember.RSVP.Promise (resolve) =>
         request = Ember.$.ajax
-            url: '/auth/login'
+            url: endpoint
             type: 'POST'
             data: {username, password}
 
