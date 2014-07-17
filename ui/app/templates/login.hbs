@@ -1,39 +1,70 @@
-<div class="row login-page">
-    <div class="col-md-5">
-        <h6>Login</h6>
-        <form role="form">
+<div class="login-page row">
+    <div class="section col-md-5">
+        <h1>
+            <small>Login</small>
+        </h1>
+
+        <form role="form" class="form-horizontal">
             <div class="form-group">
-                <label for="username">Username or Email</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter username">
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <label for="username" class="col-sm-5 control-label">Username</label>
+
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="username" placeholder="username">
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-default">Login</button>
+            <div class="form-group">
+                <label for="password" class="col-sm-5 control-label">Password</label>
+
+                <div class="col-sm-7">
+                    <input type="password" class="form-control" id="password" placeholder="password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-7">
+                    <button type="submit" class="btn btn-default">Login</button>
+                </div>
+            </div>
         </form>
     </div>
-    <div class="col-md-2">
-        <!-- spacer -->
-    </div>
-    <div class="col-md-5">
-        <h6>Register</h6>
-        <form role="form">
+
+    <div class="section col-md-offset-2 col-md-5">
+        <h1>
+            <small>Register</small>
+        </h1>
+
+        <form role="form" class="form-horizontal">
             <div class="form-group">
-                <label for="signup-username">Username or Email</label>
-                <input type="text" class="form-control" id="signup-username" placeholder="Enter username">
-            </div>
-            <div class="form-group">
-                <label for="signup-password">Password</label>
-                <input type="password" class="form-control" id="signup-password" placeholder="Password">
-            </div>
-            <div class="form-group">
-                <label for="signup-password-repeat">Re-enter Password</label>
-                <input type="password" class="form-control" id="signup-password-repeat" placeholder="Re-enter Password">
+                <label for="signup-username" class="col-sm-5 control-label">Username</label>
+
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="signup-username" placeholder="username">
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-default">Register</button>
+            <div class="form-group">
+                <label for="signup-password" class="col-sm-5 control-label">Password</label>
+
+                <div class="col-sm-7">
+                    <input type="password" class="form-control" id="signup-password" placeholder="password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password-repeat" class="col-sm-5 control-label">Re-enter Password</label>
+
+                <div class="col-sm-7">
+                    <input type="password" class="form-control" id="signup-password-repeat"
+                           placeholder="re-enter password">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-sm-7">
+                    <button type="submit" class="btn btn-default">Register</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>
