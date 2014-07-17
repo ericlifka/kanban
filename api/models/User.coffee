@@ -14,10 +14,8 @@ User =
             required: true
 
         validatePassword: (password) -> new RSVP.Promise (resolve, reject) =>
-            bcrypt.hash password, 10, (err, hash) =>
-                if err then reject err
-                else
-                    resolve hash is @password
+            bcrypt.compare password, @password, (err, result) =>
+                resolve not err and !!result
 
         toJSON: ->
             obj = @toObject()
