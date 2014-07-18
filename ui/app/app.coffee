@@ -4,10 +4,12 @@
 
 Ember.MODEL_FACTORY_INJECTIONS = true
 
-App = Ember.Application.extend
+SimplyKanban = Ember.Application.extend
     modulePrefix: 'simply-kanban'
     Resolver: Resolver
+    lastPage: '#'
+    currentPage: '#'
 
-loadInitializers App, 'simply-kanban'
+loadInitializers SimplyKanban, 'simply-kanban'
 
-`export default App`
+`export default SimplyKanban`

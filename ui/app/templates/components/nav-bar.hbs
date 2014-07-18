@@ -8,15 +8,24 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Simply Kanban</a>
+            <a class="navbar-brand" href="#/dashboard">Simply Kanban</a>
         </div>
 
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
+            <ul class="navigation-pages nav navbar-nav">
+                {{#each page in navigationPages}}
+                    <li {{bind-attr class="page.active"}}>
+                        <a {{bind-attr href=page.href}}>{{page.display}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+
             {{#if session.authenticated}}
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-text">
                         Welcome {{session.user.username}}!
                     </li>
+                    <li class="navbar-text">Dashboard</li>
                     <li>
                         <button type="button" class="btn btn-link navbar-btn" {{action "logout"}}>
                             Logout
@@ -26,13 +35,13 @@
             {{else}}
                 <form {{bind-attr class=":navbar-form :navbar-right loginError:has-error"}} {{action "login" on="submit"}}>
                     <div class="form-group">
-                        {{input type="text" class="form-control" placeholder="username" value=loginUsername}}
+                        {{input type="text" class="form-control" placeholder="username" value=loginUsername tabindex="1"}}
                     </div>
                     <div class="form-group">
-                        {{input type="password" class="form-control" placeholder="password" value=loginPassword}}
+                        {{input type="password" class="form-control" placeholder="password" value=loginPassword tabindex="2"}}
                     </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <button type="button" class="btn btn-link" {{action "openRegistrationModal"}}>
+                    <button type="submit" class="btn btn-primary" tabindex="3">Login</button>
+                    <button type="button" class="btn btn-link" tabindex="4" {{action "openRegistrationModal"}}>
                         Sign Up
                     </button>
                 </form>

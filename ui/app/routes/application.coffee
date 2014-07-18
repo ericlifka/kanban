@@ -2,15 +2,30 @@
 
 ApplicationRoute = Ember.Route.extend
     beforeModel: (transition) ->
-        @session.confirmSession().then ({authenticated}) =>
-            if not authenticated and transition isnt 'about'
-                @transitionTo 'about'
+        @checkSessionBeforeTransition transition
 
     actions:
+        willTransition: (transition) ->
+            @checkSessionBeforeTransition transition
+
         loggedIn: ->
-            @transitionTo 'index'
+            @transitionTo 'dashboard'
 
         loggedOut: ->
             @transitionTo 'about'
+
+    checkSessionBeforeTransition: (transition) ->
+        if transition.targetName is 'index'
+            @transitionTo 'dashboard'
+            return
+
+        @changeActivePage transition
+        @session.confirmSession().then ({authenticated}) =>
+            if not authenticated and transition.targetName isnt 'about'
+                @transitionTo 'about'
+
+    changeActivePage: (transition) ->
+        SimplyKanban.set 'lastPage', SimplyKanban.get('currentPage') or '#'
+        SimplyKanban.set 'currentPage', transition.targetName
 
 `export default ApplicationRoute`

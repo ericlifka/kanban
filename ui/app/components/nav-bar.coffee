@@ -1,6 +1,19 @@
 `import Ember from 'ember'`
 
+pages = [
+    'dashboard'
+]
+
 NavBarComponent = Ember.Component.extend
+    activePage: null
+
+    navigationPages: Ember.computed 'activePage', ->
+        active = @get 'activePage'
+        for page in pages
+            active: page is active
+            href: "#/#{page}"
+            display: page
+
     loginError: false
 
     passwordError: null
