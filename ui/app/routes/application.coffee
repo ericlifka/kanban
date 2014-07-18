@@ -2,10 +2,9 @@
 
 ApplicationRoute = Ember.Route.extend
     beforeModel: (transition) ->
-        if transition.targetName not in ['about', 'register']
-            @session.confirmSession().then ({authenticated}) =>
-                if not authenticated
-                    @transitionTo 'about'
+        @session.confirmSession().then ({authenticated}) =>
+            if not authenticated and transition isnt 'about'
+                @transitionTo 'about'
 
     actions:
         loggedIn: ->

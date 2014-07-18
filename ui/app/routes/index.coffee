@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 IndexRoute = Ember.Route.extend
-    model: ->
-        ['red', 'blue', 'yellow']
+    beforeModel: ->
+        @transitionTo 'dashboard'
 
 `export default IndexRoute`
