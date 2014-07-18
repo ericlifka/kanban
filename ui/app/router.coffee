@@ -4,7 +4,7 @@ Router = Ember.Router.extend
     location: SimplyKanbanENV.locationType
 
 Router.map ->
-    @route 'login'
+    @route 'about'
     @route 'register'
 
 `export default Router`

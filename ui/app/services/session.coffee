@@ -3,6 +3,9 @@
 SessionService = Ember.Object.extend
     user: null
 
+    authenticated: Ember.computed 'user', ->
+        !!@get 'user'
+
     confirmSession: -> new Ember.RSVP.Promise (resolve) =>
         sessionUser = @get 'user'
         if sessionUser
@@ -14,11 +17,20 @@ SessionService = Ember.Object.extend
 
                 resolve response
 
+    register: (username, password) ->
+        @authRequest '/auth/register', username, password
+
     login: (username, password) ->
         @authRequest '/auth/login', username, password
 
-    register: (username, password) ->
-        @authRequest '/auth/register', username, password
+    logout: -> new Ember.RSVP.Promise (resolve) =>
+        request = Ember.$.ajax
+            url: '/auth/logout'
+            type: 'POST'
+
+        request.always =>
+            @set 'user', null
+            resolve()
 
     authRequest: (endpoint, username, password) -> new Ember.RSVP.Promise (resolve) =>
         request = Ember.$.ajax

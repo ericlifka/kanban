@@ -6,25 +6,6 @@ CREATE_FAILED = (internal) ->
     internalError: internal
 
 AuthController =
-    login: (req, res) ->
-        username = req.param 'username'
-        password = req.param 'password'
-
-        if not username or not password
-            return res.json MISSING_PARAM, 400
-
-        User.findOne {username}, (err, user) ->
-            if not user
-                res.json NOT_AUTHORIZED, 401
-            else
-                user.validatePassword(password).then (passwordMatch) ->
-                    if passwordMatch
-                        req.session.authenticated = true
-                        req.session.user = user
-                        res.json user, 200
-                    else
-                        res.json NOT_AUTHORIZED, 401
-
     status: (req, res) ->
         if req.session.user and req.session.authenticated
             res.json {user: req.session.user, authenticated: true}
@@ -46,5 +27,29 @@ AuthController =
                         req.session.authenticated = true
                         req.session.user = user
                         res.json user, 201
+
+    login: (req, res) ->
+        username = req.param 'username'
+        password = req.param 'password'
+
+        if not username or not password
+            return res.json MISSING_PARAM, 400
+
+        User.findOne {username}, (err, user) ->
+            if not user
+                res.json NOT_AUTHORIZED, 401
+            else
+                user.validatePassword(password).then (passwordMatch) ->
+                    if passwordMatch
+                        req.session.authenticated = true
+                        req.session.user = user
+                        res.json user, 200
+                    else
+                        res.json NOT_AUTHORIZED, 401
+
+    logout: (req, res) ->
+        req.session.authenticated = false
+        req.session.user = null
+        res.json {authenticated: false}
 
 module.exports = AuthController
