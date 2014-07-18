@@ -1,6 +1,5 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#navbar-collapse-1">
@@ -33,7 +32,7 @@
                         {{input type="password" class="form-control" placeholder="password" value=loginPassword}}
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
-                    <button type="button" class="btn btn-link" {{action "register"}}>
+                    <button type="button" class="btn btn-link" {{action "openRegistrationModal"}}>
                         Sign Up
                     </button>
                 </form>
@@ -41,3 +40,57 @@
         </div>
     </div>
 </nav>
+
+<div {{bind-attr class=":register-modal modalOpen::hidden"}}>
+    <div class="row">
+        <div class="registration-form col-md-offset-3 col-md-6">
+            <h1>
+                <small>Register</small>
+            </h1>
+
+            <form {{bind-attr class=":form-horizontal"}} {{action "register" on="submit"}}>
+
+                {{#if registrationError}}
+                    <div class="form-group">
+                        <div class="col-sm-offset-5 col-sm-7">
+                            <p class="form-control-static">{{registrationError}}</p>
+                        </div>
+                    </div>
+                {{/if}}
+
+                <div {{bind-attr class=":form-group usernameError:has-error"}}>
+                    <label for="signup-username" class="col-sm-5 control-label">Username</label>
+
+                    <div class="col-sm-7">
+                        {{input type="text" class="form-control" id="signup-username" placeholder="username" value=registrationUsername}}
+                    </div>
+                </div>
+
+                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error"}}>
+                    <label for="signup-password" class="col-sm-5 control-label">Password</label>
+
+                    <div class="col-sm-7">
+                        {{input type="password" class="form-control" id="signup-password" placeholder="password" value=registrationPassword}}
+                    </div>
+                </div>
+
+                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error"}}>
+                    <label for="signup-password-repeat" class="col-sm-5 control-label">Re-enter Password</label>
+
+                    <div class="col-sm-7">
+                        {{input type="password" class="form-control" id="signup-password-repeat" placeholder="re-enter password" value=passwordRepeat}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-7">
+                        <button type="submit" class="btn btn-default">Sign Up</button>
+                        <button type="button" class="btn btn-link" {{action "closeRegistrationModal"}}>
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
