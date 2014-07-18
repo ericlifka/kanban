@@ -6,5 +6,6 @@ Router = Ember.Router.extend
 Router.map ->
     @route 'about'
     @route 'dashboard'
+    @route 'account'
 
 `export default Router`
