@@ -1,3 +1,19 @@
-{{#each color in controller}}
-    <div>{{color}}</div>
-{{/each}}
+<div class="container">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Your Projects</h3>
+        </div>
+        <ul class="list-group">
+            {{#each project in controller}}
+                <li class="list-group-item">
+                    <h3>{{#link-to 'project' project}}{{project.name}}{{/link-to}} <small>{{project.description}}</small></h3>
+                </li>
+            {{/each}}
+            <li class="list-group-item">
+                <button type="button" class="btn btn-link">New project</button>
+            </li>
+        </ul>
+    </div>
+
+</div>

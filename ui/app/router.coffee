@@ -8,4 +8,6 @@ Router.map ->
     @route 'dashboard'
     @route 'account'
 
+    @resource 'project', path: '/project/:project_id'
+
 `export default Router`

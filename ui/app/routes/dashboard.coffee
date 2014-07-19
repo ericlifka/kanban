@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
 
 DashboardRoute = Ember.Route.extend
-    model: -> ['red', 'blue', 'green', 'brown', 'poop']
+    model: ->
+        @store.find 'project'
 
 `export default DashboardRoute`
