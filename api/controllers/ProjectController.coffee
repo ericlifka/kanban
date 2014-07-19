@@ -44,7 +44,7 @@ ProjectController =
             else
                 res.send {project}
 
-    delete: (req, res) ->
+    destroy: (req, res) ->
         res.forbidden "Deleting projects is not supported at this time"
 
 module.exports = ProjectController
