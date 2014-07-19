@@ -52,7 +52,7 @@ NavBarComponent = Ember.Component.extend
 
             if password isnt passwordRepeat
                 @set 'passwordError', true
-                @set 'registrationError', "Password fields don't match"
+                @set 'registrationError', "<strong>Error!</strong> Password fields don't match"
                 return
 
             @session.register(username, password).then ({authenticated, status}) =>
@@ -62,7 +62,7 @@ NavBarComponent = Ember.Component.extend
                 else
                     @set 'usernameError', true
                     @set 'registrationError', switch status
-                        when 400 then "Username and Password are required"
+                        when 400 then "<strong>Error!</strong> All fields are required"
                         when 409 then "Username is already in use"
                         when 500 then "Couldn't create user for username"
                         else "Registration failed"
