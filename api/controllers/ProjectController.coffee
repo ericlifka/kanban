@@ -34,4 +34,17 @@ ProjectController =
                 else
                     res.json {projects}
 
+    update: (req, res) ->
+        id = req.param 'id'
+        projectUpdate = req.param 'project'
+
+        Project.update id, projectUpdate, (error, project) ->
+            if error
+                res.send {error}, 500
+            else
+                res.send {project}
+
+    delete: (req, res) ->
+        res.forbidden "Deleting projects is not supported at this time"
+
 module.exports = ProjectController
