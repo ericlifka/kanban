@@ -3,15 +3,14 @@ ProjectController =
     _config: {}
 
     create: (req, res) ->
-        name = req.param 'name'
-        description = req.param('description') or name
-        owner = req.session.username
+        project = req.param 'project'
+        project.owner = req.session.username
 
-        Project.create({name, description, owner}).done (error, project) ->
+        Project.create(project).done (error, project) ->
             if error
                 res.json {error}, 500
             else
-                res.json project, 201
+                res.json {project}, 201
 
     find: (req, res) ->
         id = req.param 'id'
@@ -24,7 +23,7 @@ ProjectController =
                 else if project.owner isnt username
                     res.json {error: "You don't have permission for that project"}, 403
                 else
-                    res.json project
+                    res.json {project}
 
         else # find all
             Project.find(
@@ -33,6 +32,6 @@ ProjectController =
                 if error
                     res.send {error}, 500
                 else
-                    res.json projects
+                    res.json {projects}
 
 module.exports = ProjectController

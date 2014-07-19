@@ -127,7 +127,7 @@ module.exports.controllers = {
          * PUT    /foos/:id?
          * DELETE /foos/:id?
          */
-        pluralize: false
+        pluralize: true
 
     },
 
