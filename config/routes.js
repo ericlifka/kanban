@@ -40,6 +40,7 @@ module.exports.routes = {
     'post /auth/register': 'AuthController.register',
     'post /auth/login': 'AuthController.login',
     'post /auth/logout': 'AuthController.logout',
+    'put /auth/password': 'AuthController.changePassword',
 
 
     /*

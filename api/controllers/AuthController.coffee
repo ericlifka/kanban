@@ -42,17 +42,47 @@ AuthController =
             if not user
                 res.json NOT_AUTHORIZED, 401
             else
-                user.validatePassword(password).then (passwordMatch) ->
+                promise = user.validatePassword password
+                promise.then (passwordMatch) ->
                     if passwordMatch
                         req.session.authenticated = true
                         req.session.user = user
                         res.json user, 200
                     else
                         res.json NOT_AUTHORIZED, 401
+                promise.catch (error) -> res.json {error}, 500
 
     logout: (req, res) ->
         req.session.authenticated = false
         req.session.user = null
         res.json {authenticated: false}
+
+    changePassword: (req, res) ->
+        username = req.param 'username'
+        oldPassword = req.param 'oldPassword'
+        newPassword = req.param 'newPassword'
+        sessionUser = req.session.user
+
+        if sessionUser.username isnt username
+            return res.json NOT_AUTHORIZED, 401
+
+        User.findOne {username}, (err, user) ->
+            if err or not user
+                return res.json NOT_AUTHORIZED, 401
+
+            user.validatePassword(oldPassword).then((passwordMatch) ->
+                if not passwordMatch
+                    false
+                else
+                    user.changePassword newPassword
+
+            ).then((success) ->
+                if success
+                    res.send 200
+                else
+                    res.json NOT_AUTHORIZED, 401
+
+            ).catch (error) ->
+                res.json {error}, 500
 
 module.exports = AuthController

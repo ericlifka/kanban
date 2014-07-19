@@ -45,4 +45,18 @@ SessionService = Ember.Object.extend
         request.fail (xhr) ->
             resolve {authenticated: false, status: xhr.status}
 
+    changePassword: (oldPassword, newPassword) -> new Ember.RSVP.Promise (resolve) =>
+        username = @get 'user.username'
+        request = Ember.$.ajax
+            url: '/auth/password'
+            type: 'PUT'
+            data: {username, oldPassword, newPassword}
+
+        request.done (user, status, xhr) ->
+            resolve xhr.status is 200
+
+        request.fail (xhr) ->
+            console.log "Password request failed: ", xhr.status, xhr
+            resolve false
+
 `export default SessionService`
