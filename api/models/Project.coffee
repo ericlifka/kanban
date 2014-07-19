@@ -8,4 +8,8 @@ Project =
             type: 'string'
             required: true
 
+        owner:
+            type: 'string'
+            required: true
+
 module.exports = Project

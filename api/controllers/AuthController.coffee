@@ -7,10 +7,18 @@ CREATE_FAILED = (internal) ->
 
 AuthController =
     status: (req, res) ->
-        if req.session.user and req.session.authenticated
-            res.json {user: req.session.user, authenticated: true}
-        else
-            res.json {authenticated: false}
+        {username, authenticated} = req.session
+
+        if not authenticated or not username
+            return res.json {authenticated: false}
+
+        User.findOne {username}, (error, user) ->
+            if error
+                req.session.username = null
+                req.session.authenticated = false
+                res.json {authenticated: false}
+            else
+                res.json {user, authenticated}
 
     register: (req, res) ->
         username = req.param 'username'
@@ -19,17 +27,14 @@ AuthController =
         if not username or not password
             return res.json MISSING_PARAM, 400
 
-        User.findOne {username}, (err, user) ->
-            if user
-                res.send NOT_UNIQUE, 409
+        User.create({username, password}).done (err, user) ->
+            if err
+                res.json CREATE_FAILED(err), 500
             else
-                User.create({username, password}).done (err, user) ->
-                    if err
-                        res.json CREATE_FAILED(err), 500
-                    else
-                        req.session.authenticated = true
-                        req.session.user = user
-                        res.json user, 201
+                req.session.authenticated = true
+                req.session.username = user.username
+                res.json user, 201
+
 
     login: (req, res) ->
         username = req.param 'username'
@@ -46,7 +51,7 @@ AuthController =
                 promise.then (passwordMatch) ->
                     if passwordMatch
                         req.session.authenticated = true
-                        req.session.user = user
+                        req.session.username = user.username
                         res.json user, 200
                     else
                         res.json NOT_AUTHORIZED, 401
@@ -54,16 +59,16 @@ AuthController =
 
     logout: (req, res) ->
         req.session.authenticated = false
-        req.session.user = null
+        req.session.username = null
         res.json {authenticated: false}
 
     changePassword: (req, res) ->
         username = req.param 'username'
         oldPassword = req.param 'oldPassword'
         newPassword = req.param 'newPassword'
-        sessionUser = req.session.user
+        sessionUser = req.session.username
 
-        if sessionUser.username isnt username
+        if sessionUser isnt username
             return res.json NOT_AUTHORIZED, 401
 
         User.findOne {username}, (err, user) ->
