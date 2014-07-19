@@ -13,4 +13,26 @@ ProjectController =
             else
                 res.json project, 201
 
+    find: (req, res) ->
+        id = req.param 'id'
+        username = req.session.username
+
+        if id # find one
+            Project.findOne(id).done (err, project) ->
+                if err or not project
+                    res.send 404
+                else if project.owner isnt username
+                    res.json {error: "You don't have permission for that project"}, 403
+                else
+                    res.json project
+
+        else # find all
+            Project.find(
+                owner: username
+            ).sort('name ASC').done (error, projects) ->
+                if error
+                    res.send {error}, 500
+                else
+                    res.json projects
+
 module.exports = ProjectController
