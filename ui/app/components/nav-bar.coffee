@@ -24,6 +24,9 @@ NavBarComponent = Ember.Component.extend
         repeat = @get 'passwordRepeat'
         password and repeat and password isnt repeat
 
+    hasFeedback: Ember.computed 'passwordWarning', 'passwordError', ->
+        @get('passwordWarning') or @get('passwordError')
+
     actions:
         login: ->
             @set 'loginError', false
@@ -69,8 +72,12 @@ NavBarComponent = Ember.Component.extend
 
         openRegistrationModal: ->
             @set 'modalOpen', true
+            Ember.run.scheduleOnce 'afterRender', @, @focusFirstInput
 
         closeRegistrationModal: ->
             @set 'modalOpen', false
+
+    focusFirstInput: ->
+        @$('.first-input').focus()
 
 `export default NavBarComponent`

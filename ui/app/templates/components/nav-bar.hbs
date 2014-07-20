@@ -68,27 +68,36 @@
                     </div>
                 {{/if}}
 
-                <div {{bind-attr class=":form-group usernameError:has-error"}}>
+                <div {{bind-attr class=":form-group usernameError:has-error usernameError:has-feedback"}}>
                     <label for="signup-username" class="col-sm-5 control-label">Username</label>
 
                     <div class="col-sm-7">
-                        {{input type="text" class="form-control" id="signup-username" placeholder="username" value=registrationUsername}}
+                        {{input type="text" class="form-control first-input" id="signup-username" placeholder="username" value=registrationUsername}}
+                        {{#if usernameError}}
+                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        {{/if}}
                     </div>
                 </div>
 
-                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error"}}>
+                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error hasFeedback"}}>
                     <label for="signup-password" class="col-sm-5 control-label">Password</label>
 
                     <div class="col-sm-7">
                         {{input type="password" class="form-control" id="signup-password" placeholder="password" value=registrationPassword}}
+                        {{#if passwordWarning}}
+                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                        {{/if}}
                     </div>
                 </div>
 
-                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error"}}>
+                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error hasFeedback"}}>
                     <label for="signup-password-repeat" class="col-sm-5 control-label">Re-enter Password</label>
 
                     <div class="col-sm-7">
                         {{input type="password" class="form-control" id="signup-password-repeat" placeholder="re-enter password" value=passwordRepeat}}
+                        {{#if passwordWarning}}
+                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+                        {{/if}}
                     </div>
                 </div>
 
