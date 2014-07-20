@@ -1,22 +1,35 @@
 `import Ember from 'ember'`
 
 pages = [
-    {route: 'dashboard', display: 'dashboard'}
-    {route: 'project.board', display: 'kanban', dynamic: true}
-    {route: 'project.plan', display: 'planning', dynamic: true}
     {route: 'about', display: 'about'}
+    {route: 'dashboard', display: 'dashboard', auth: true}
+    {route: 'project.board', display: 'kanban', dynamic: true, auth: true}
+    {route: 'project.plan', display: 'planning', dynamic: true, auth: true}
 ]
 
 NavBarComponent = Ember.Component.extend
     activePage: null
+    authenticatedBinding: 'session.authenticated'
+    lastProjectBinding: 'session.lastProject'
 
-    navigationPages: Ember.computed 'activePage', ->
+    navigationPages: Ember.computed 'activePage', 'authenticated', 'lastProject', ->
+        authenticated = @get 'authenticated'
         active = @get 'activePage'
-        for page in pages
-            active: page.route is active
-            route: page.route
-            display: page.display
-            dynamic: page.dynamic
+        lastProject = @get 'lastProject'
+
+        descriptions = _.collect pages, (page) ->
+            if page.auth and not authenticated
+                false
+            else if page.dynamic and not lastProject
+                false
+            else
+                active: page.route is active
+                display: page.display
+                dynamic: page.dynamic
+                route: page.route
+                model: if page.dynamic then lastProject else null
+
+        _.filter descriptions, (page) -> page
 
     loginError: false
 

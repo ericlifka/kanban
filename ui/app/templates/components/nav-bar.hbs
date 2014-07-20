@@ -16,11 +16,7 @@
                 {{#each page in navigationPages}}
                     <li {{bind-attr class="page.active"}}>
                         {{#if page.dynamic}}
-                            {{#if session.lastProject}}
-                                {{#link-to page.route session.lastProject}}{{page.display}}{{/link-to}}
-                            {{else}}
-                                {{#link-to 'dashboard'}}{{page.display}}{{/link-to}}
-                            {{/if}}
+                            {{#link-to page.route page.model}}{{page.display}}{{/link-to}}
                         {{else}}
                             {{#link-to page.route}}{{page.display}}{{/link-to}}
                         {{/if}}
