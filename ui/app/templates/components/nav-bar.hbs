@@ -15,7 +15,15 @@
             <ul class="navigation-pages nav navbar-nav">
                 {{#each page in navigationPages}}
                     <li {{bind-attr class="page.active"}}>
-                        {{#link-to page.route}}{{page.display}}{{/link-to}}
+                        {{#if page.dynamic}}
+                            {{#if session.lastProject}}
+                                {{#link-to page.route session.lastProject}}{{page.display}}{{/link-to}}
+                            {{else}}
+                                {{#link-to 'dashboard'}}{{page.display}}{{/link-to}}
+                            {{/if}}
+                        {{else}}
+                            {{#link-to page.route}}{{page.display}}{{/link-to}}
+                        {{/if}}
                     </li>
                 {{/each}}
             </ul>

@@ -2,7 +2,8 @@
 
 pages = [
     {route: 'dashboard', display: 'dashboard'}
-    {route: 'project.board', display: 'kanban'}
+    {route: 'project.board', display: 'kanban', dynamic: true}
+    {route: 'project.plan', display: 'planning', dynamic: true}
 ]
 
 NavBarComponent = Ember.Component.extend
@@ -14,6 +15,7 @@ NavBarComponent = Ember.Component.extend
             active: page.route is active
             route: page.route
             display: page.display
+            dynamic: page.dynamic
 
     loginError: false
 
