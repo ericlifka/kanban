@@ -12,4 +12,13 @@ NewProjectControlComponent = Ember.Component.extend
         toggleFormOff: ->
             @set 'formOn', false
 
+        createProject: ->
+            name = @get 'newProjectName'
+            description = @get 'newProjectDescription'
+
+            if not name or not description
+                @set 'newProjectError', true
+            else
+                
+
 `export default NewProjectControlComponent`

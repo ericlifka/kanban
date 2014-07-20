@@ -11,9 +11,6 @@ ApplicationRoute = Ember.Route.extend
         loggedIn: ->
             @transitionTo 'dashboard'
 
-        loggedOut: ->
-            @transitionTo 'about'
-
     checkSessionBeforeTransition: (transition) ->
         if transition.targetName is 'index'
             @transitionTo 'dashboard'

@@ -2,11 +2,11 @@
     <form class="form-inline" role="form">
         <div class="form-group">
             <label class="sr-only" for="projectName">Project name</label>
-            <input type="text" class="form-control first-input" id="projectName" placeholder="Project name">
+            {{input type="text" class="form-control first-input" id="projectName" placeholder="Project name" value=newProjectName}}
         </div>
         <div class="form-group">
             <label class="sr-only" for="projectDescription">Description</label>
-            <input type="text" class="form-control" id="projectDescription" placeholder="Description">
+            {{input type="text" class="form-control" id="projectDescription" placeholder="Description" value=newProjectDescription}}
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
         <button type="button" class="btn btn-link" {{action "toggleFormOff"}}>Cancel</button>

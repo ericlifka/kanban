@@ -42,8 +42,7 @@ NavBarComponent = Ember.Component.extend
             return
 
         logout: ->
-            @session.logout().then =>
-                @triggerAction action: 'loggedOut'
+            @session.logout()
 
         register: ->
             @set 'passwordError', null
