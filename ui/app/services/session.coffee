@@ -27,7 +27,7 @@ SessionService = Ember.Object.extend
         Ember.$.ajax(
             url: '/auth/logout'
             type: 'POST'
-        ).always =>
+        ).always ->
             location.reload()
 
     authRequest: (endpoint, username, password) -> new Ember.RSVP.Promise (resolve) =>
