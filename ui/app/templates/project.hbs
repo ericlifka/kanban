@@ -1,4 +1,11 @@
-<div 
+<div class="container">
+    <div class="page-header">
+        <span class="h3">
+            {{name}}
+            <small>{{description}}</small>
+        </span>
+        <small>{{#link-to 'dashboard'}}switch{{/link-to}}</small>
+    </div>
 
-<div>project template</div>
-{{outlet}}
+    {{outlet}}
+</div>
