@@ -2,8 +2,10 @@ StoreInitializer =
     name: 'storeConvenienceInjector'
     after: 'store'
     initialize: (container, app) ->
-        # convenience for development, shouldn't be used in the app
-        store = container.lookup 'store:main'
-        app.set 'store', store
+        # inject store into components, because they act as their own controllers
+        app.inject 'component', 'store', 'store:main'
+
+        # convenience for development, shouldn't be relied in the app
+        app.set 'store', container.lookup 'store:main'
 
 `export default StoreInitializer`

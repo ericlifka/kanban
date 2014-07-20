@@ -1,5 +1,13 @@
 {{#if formOn}}
-    <form class="form-inline" role="form">
+    {{#if createFailedError}}
+        <div class="form-group">
+            <div class="alert alert-danger" role="alert">
+                <strong>Error!</strong> Couldn't create the project
+            </div>
+        </div>
+    {{/if}}
+
+    <form {{bind-attr class=":form-inline newProjectError:has-error"}} {{action "createProject" on="submit"}}>
         <div class="form-group">
             <label class="sr-only" for="projectName">Project name</label>
             {{input type="text" class="form-control first-input" id="projectName" placeholder="Project name" value=newProjectName}}
