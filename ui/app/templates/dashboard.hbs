@@ -7,7 +7,7 @@
         <ul class="list-group">
             {{#each project in controller}}
                 <li class="list-group-item">
-                    <h3>{{#link-to 'project' project}}{{project.name}}{{/link-to}} <small>{{project.description}}</small></h3>
+                    <h3>{{#link-to 'project.board' project}}{{project.name}}{{/link-to}} <small>{{project.description}}</small></h3>
                 </li>
             {{/each}}
             <li class="list-group-item">

@@ -1,7 +1,8 @@
 `import Ember from 'ember'`
 
 pages = [
-    'dashboard'
+    {route: 'dashboard', display: 'dashboard'}
+    {route: 'project.board', display: 'kanban'}
 ]
 
 NavBarComponent = Ember.Component.extend
@@ -10,9 +11,9 @@ NavBarComponent = Ember.Component.extend
     navigationPages: Ember.computed 'activePage', ->
         active = @get 'activePage'
         for page in pages
-            active: page is active
-            href: "#/#{page}"
-            display: page
+            active: page.route is active
+            route: page.route
+            display: page.display
 
     loginError: false
 

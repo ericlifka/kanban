@@ -15,7 +15,7 @@
             <ul class="navigation-pages nav navbar-nav">
                 {{#each page in navigationPages}}
                     <li {{bind-attr class="page.active"}}>
-                        <a {{bind-attr href=page.href}}>{{page.display}}</a>
+                        {{#link-to page.route}}{{page.display}}{{/link-to}}
                     </li>
                 {{/each}}
             </ul>
