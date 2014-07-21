@@ -2,9 +2,19 @@
 
 SessionService = Ember.Object.extend
     user: null
+    lastProject: null
 
     authenticated: Ember.computed 'user', ->
         !!@get 'user'
+
+    loadLastProjectOnLogin: Ember.observer 'user', 'authenticated', ->
+        authenticated = @get 'authenticated'
+        username = @get 'user.username'
+        if authenticated and username
+            projectId = window.localStorage?.getItem "#{username}.last_project"
+            if projectId
+                @store.find('project', projectId).then (project) =>
+                    @set 'lastProject', project
 
     confirmSession: -> new Ember.RSVP.Promise (resolve) =>
         sessionUser = @get 'user'
@@ -56,5 +66,15 @@ SessionService = Ember.Object.extend
         request.fail (xhr) ->
             console.log "Password request failed: ", xhr.status, xhr
             resolve false
+
+    changeProject: (project) ->
+        @set 'lastProject', project
+        @cacheLastProjectId()
+
+    cacheLastProjectId: ->
+        projectId = @get 'lastProject.id'
+        username = @get 'user.username'
+        if username and projectId
+            window.localStorage?.setItem "#{username}.last_project", projectId
 
 `export default SessionService`
