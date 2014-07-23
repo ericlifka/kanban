@@ -1,10 +1,5 @@
-<div class="kanban-board">
-    <div class="controls">
-        <button role="button" class="btn btn-primary" {{action 'newCard'}}>New Card</button>
-    </div>
-    <div class="columns row">
-        {{#each definition in columnDefinitions}}
-            {{kanban-column column=definition}}
-        {{/each}}
-    </div>
+<div class="columns row">
+    {{#each definition in columnDefinitions}}
+        {{kanban-column column=definition}}
+    {{/each}}
 </div>

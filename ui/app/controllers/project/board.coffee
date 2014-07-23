@@ -1,6 +1,6 @@
 `import Ember from 'ember'`
 
-BoardController = Ember.ObjectController.extend
+ProjectBoardController = Ember.ObjectController.extend
     columnDefinitions: [
         {rank: 0, name: 'preparing'}
         {rank: 1, name: 'doing'}
@@ -11,4 +11,4 @@ BoardController = Ember.ObjectController.extend
     actions:
         newCard: -> false
 
-`export default BoardController`
+`export default ProjectBoardController`
