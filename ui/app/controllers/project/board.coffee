@@ -1,12 +1,21 @@
 `import Ember from 'ember'`
 
 ProjectBoardController = Ember.ObjectController.extend
-    columnDefinitions: [
-        {rank: 0, name: 'preparing'}
-        {rank: 1, name: 'doing'}
-        {rank: 2, name: 'verifying'}
-        {rank: 3, name: 'releasing'}
+    #TODO: server loaded columns to allow configuration
+    columnDescriptions: [
+        {column: 0, name: 'preparing'}
+        {column: 1, name: 'doing'}
+        {column: 2, name: 'verifying'}
+        {column: 3, name: 'releasing'}
     ]
+
+    columns: Ember.computed 'model.cards.@each.column', ->
+        cards = @get 'model.cards'
+        columnGroups = _.groupBy cards, (card) -> card.column
+        _.collect @columnDescriptions, (description) ->
+            column: description.column
+            name: description.name
+            cards: columnGroups[description.column]
 
     actions:
         newCard: -> false
