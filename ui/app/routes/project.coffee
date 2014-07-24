@@ -1,9 +1,7 @@
 `import Ember from 'ember'`
 
 ProjectRoute = Ember.Route.extend
-    setupController: (controller, model) ->
-        @session.changeProject model
-        controller.set 'model', model
-        return
+    afterModel: (project) ->
+        @session.changeProject project
 
 `export default ProjectRoute`
