@@ -13,7 +13,7 @@ KanbanColumnComponent = Ember.Component.extend
         event.preventDefault()
 
     drop: (event) ->
-        cardId = event.dataTransfer.getData 'text/data'
-        console.log @get('column.name'), cardId
+        cardId = event.dataTransfer.getData 'card'
+        console.log 'dropped ', cardId, ' on ', @get('column.name'), @get 'column.column'
 
 `export default KanbanColumnComponent`
