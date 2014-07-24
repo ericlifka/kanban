@@ -14,6 +14,6 @@ KanbanColumnComponent = Ember.Component.extend
 
     drop: (event) ->
         cardId = event.dataTransfer.getData 'card'
-        console.log 'dropped ', cardId, ' on ', @get('column.name'), @get 'column.column'
+        #TODO get the card model and update its column
 
 `export default KanbanColumnComponent`
