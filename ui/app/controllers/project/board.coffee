@@ -11,7 +11,7 @@ ProjectBoardController = Ember.ObjectController.extend
 
     columns: Ember.computed 'model.cards.@each.column', ->
         cards = @get 'model.cards'
-        columnGroups = _.groupBy cards, (card) -> card.column
+        columnGroups = _.groupBy cards, (card) -> card.get 'column'
         _.collect @columnDescriptions, (description) ->
             column: description.column
             name: description.name
