@@ -9,4 +9,11 @@ KanbanColumnComponent = Ember.Component.extend
         cards = @get 'column.cards'
         _.sortBy cards, (card) -> card.rank
 
+    dragOver: (event) ->
+        event.preventDefault()
+
+    drop: (event) ->
+        cardId = event.dataTransfer.getData 'text/data'
+        console.log @get('column.name'), cardId
+
 `export default KanbanColumnComponent`

@@ -5,4 +5,7 @@ KanbanCardComponent = Ember.Component.extend
     attributeBindings: ['draggable']
     draggable: "true"
 
+    dragStart: (event) ->
+        event.dataTransfer.setData 'text/data', @get 'card.id'
+
 `export default KanbanCardComponent`
