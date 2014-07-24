@@ -5,5 +5,4 @@ Project = DS.Model.extend
     description: DS.attr()
     owner: DS.attr()
 
-
 `export default Project`

@@ -1,4 +1,3 @@
-# Empty controller provided for automatic REST routes on the 'Project' model.
 ProjectController =
     _config: {}
 
@@ -17,11 +16,11 @@ ProjectController =
         username = req.session.username
 
         if id # find one
-            Project.findOne(id).done (err, project) ->
-                if err or not project
-                    res.send 404
+            Project.findOne(id).done (error, project) ->
+                if error or not project
+                    res.send {error}, 404
                 else if project.owner isnt username
-                    res.json {error: "You don't have permission for that project"}, 403
+                    res.forbidden "You don't have permission for that project"
                 else
                     res.json {project}
 
