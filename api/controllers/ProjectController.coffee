@@ -7,9 +7,16 @@ ProjectController =
 
         Project.create(project).done (error, project) ->
             if error
-                res.json {error}, 500
-            else
-                res.json {project}, 201
+                return res.json {error}, 500
+
+            Card.create({
+                name: 'topCard'
+                creator: project.owner
+                projectId: project.id
+            }).done (error, card) ->
+                project.topCard = card.id
+                project.save (error) ->
+                    res.json {project}, 201
 
     find: (req, res) ->
         id = req.param 'id'

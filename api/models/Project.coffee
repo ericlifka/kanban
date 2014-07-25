@@ -12,4 +12,7 @@ Project =
             type: 'string'
             required: true
 
+        topCard:
+            type: 'string'
+
 module.exports = Project

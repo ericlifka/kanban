@@ -12,9 +12,11 @@ Card =
             type: 'string'
             required: true
 
+        parent:
+            type: 'string'
+
         column:
             type: 'int'
-            required: true
 
         rank:
             type: 'int'
