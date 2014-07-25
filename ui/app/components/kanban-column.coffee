@@ -19,6 +19,7 @@ KanbanColumnComponent = Ember.Component.extend
 
     drop: (event) ->
         console.log 'drop on column', @get 'column.name'
+        @set 'activeColumn', false
 #        cardId = event.dataTransfer.getData 'card'
 #        dropOnId = event.dataTransfer.getData 'dropOn'
 #        console.log 'dropOnId', dropOnId
