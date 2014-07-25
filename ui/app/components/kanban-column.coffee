@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 KanbanColumnComponent = Ember.Component.extend
-    classNames: ['kanban-column', 'col-sm-3']
+    classNameBindings: [':kanban-column', 'activeColumn', ':col-sm-3']
 
     activeColumn: false
     nameBinding: 'column.name'

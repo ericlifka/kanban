@@ -18,6 +18,7 @@ KanbanCardComponent = Ember.Component.extend
 
     dragLeave: (event) ->
         @set 'activeCard', false
+        event.preventDefault()
 
     dragStart: (event) ->
         @set 'dragging', true
