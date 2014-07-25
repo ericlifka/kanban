@@ -11,6 +11,7 @@ KanbanColumnComponent = Ember.Component.extend
         _.sortBy cards, (card) -> card.rank
 
     dragOver: (event) ->
+        event.preventDefault()
         @set 'activeColumn', true
 
     dragLeave: (event) ->

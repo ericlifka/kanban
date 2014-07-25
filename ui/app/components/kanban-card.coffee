@@ -13,12 +13,13 @@ KanbanCardComponent = Ember.Component.extend
         console.log 'drop on card', @get 'card.id'
 
     dragOver: (event) ->
+        event.preventDefault()
         if not @get 'dragging'
             @set 'activeCard', true
 
     dragLeave: (event) ->
         @set 'activeCard', false
-        event.preventDefault()
+#        event.preventDefault()
 
     dragStart: (event) ->
         @set 'dragging', true
