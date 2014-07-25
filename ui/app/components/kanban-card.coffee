@@ -11,6 +11,7 @@ KanbanCardComponent = Ember.Component.extend
 
     drop: (event) ->
         console.log 'drop on card', @get 'card.id'
+        @set 'activeCard', false
 
     dragOver: (event) ->
         event.preventDefault()
