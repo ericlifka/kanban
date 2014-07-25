@@ -3,6 +3,7 @@
 KanbanColumnComponent = Ember.Component.extend
     classNames: ['kanban-column', 'col-sm-3']
 
+    activeColumn: false
     nameBinding: 'column.name'
 
     cards: Ember.computed 'column.cards.@each.rank', ->
@@ -10,12 +11,18 @@ KanbanColumnComponent = Ember.Component.extend
         _.sortBy cards, (card) -> card.rank
 
     dragOver: (event) ->
-        event.preventDefault()
+        @set 'activeColumn', true
+
+    dragLeave: (event) ->
+        @set 'activeColumn', false
 
     drop: (event) ->
-        cardId = event.dataTransfer.getData 'card'
-        @store.find('card', cardId).then (card) =>
-            card.set 'column', @get 'column.column'
-            card.save()
+        console.log 'drop on column', @get 'column.name'
+#        cardId = event.dataTransfer.getData 'card'
+#        dropOnId = event.dataTransfer.getData 'dropOn'
+#        console.log 'dropOnId', dropOnId
+#        @store.find('card', cardId).then (card) =>
+#            card.set 'column', @get 'column.column'
+#            card.save()
 
 `export default KanbanColumnComponent`

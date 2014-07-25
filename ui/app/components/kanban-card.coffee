@@ -5,6 +5,9 @@ KanbanCardComponent = Ember.Component.extend
     attributeBindings: ['draggable']
     draggable: "true"
 
+    drop: (event) ->
+        console.log 'drop on card', @get 'card.id'
+
     dragStart: (event) ->
         event.dataTransfer.setData 'card', @get 'card.id'
 
