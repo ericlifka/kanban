@@ -10,7 +10,14 @@ KanbanCardComponent = Ember.Component.extend
     dragging: false
 
     drop: (event) ->
-        console.log 'drop on card', @get 'card.id'
+        cardId = event.dataTransfer.getData 'card'
+        if cardId is @get 'card.id'
+            event.stopPropagation()
+            return # didn't move card at all
+
+        event.droppedOnId = @get 'card.id'
+
+        console.log 'dropped ', cardId, ' on ', @get 'card.id'
         @set 'activeCard', false
 
     dragOver: (event) ->
