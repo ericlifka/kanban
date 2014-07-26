@@ -8,4 +8,7 @@ Project = DS.Model.extend
 
     top: null
 
+    kanbanHref: Ember.computed 'topCard', ->
+        "#/card/#{@get('topCard')}/board"
+
 `export default Project`
