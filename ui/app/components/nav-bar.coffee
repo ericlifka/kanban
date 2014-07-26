@@ -3,8 +3,8 @@
 pages = [
     {route: 'about', display: 'about'}
     {route: 'dashboard', display: 'dashboard', auth: true}
-    {route: 'project.board', display: 'kanban', dynamic: true, auth: true}
-    {route: 'project.plan', display: 'planning', dynamic: true, auth: true}
+    {route: 'card.board', display: 'kanban', dynamic: true, auth: true}
+    {route: 'card.plan', display: 'planning', dynamic: true, auth: true}
 ]
 
 NavBarComponent = Ember.Component.extend
