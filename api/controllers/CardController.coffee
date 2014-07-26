@@ -15,10 +15,12 @@ findCardById = (req, res) ->
 queryForCards = (req, res) ->
     sessionUser = req.session.username
     pid = req.param 'project'
+    parent = req.param 'parent'
 
     queryParams =
         creator: sessionUser
     queryParams.projectId = pid if pid
+    queryParams.parent = parent if parent
 
     console.log queryParams
     Card.find(queryParams).done (error, cards) ->

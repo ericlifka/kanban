@@ -2,7 +2,11 @@
 
 ProjectBoardRoute = Ember.Route.extend
     afterModel: (project) ->
-        @store.find('card', { project: project.get 'id' }).then (result) ->
-            project.set 'cards', result.content or []
+        top = project.get 'top'
+        @store.find('card', {parent: top.get 'id' }).then (result) ->
+            top.set 'cards', result.content or []
+
+    setupController: (controller, project) ->
+        controller.set 'model', project.get 'top'
 
 `export default ProjectBoardRoute`
