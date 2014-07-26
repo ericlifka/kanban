@@ -21,4 +21,9 @@ Card =
         rank:
             type: 'int'
 
+        children:
+            type: 'array'
+            defaultsTo: []
+
+
 module.exports = Card

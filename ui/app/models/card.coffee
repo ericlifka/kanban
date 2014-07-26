@@ -6,5 +6,7 @@ Card = DS.Model.extend
     projectId: DS.attr()
     column: DS.attr()
     rank: DS.attr()
+    parent: DS.attr()
+    children: DS.attr()
 
 `export default Card`

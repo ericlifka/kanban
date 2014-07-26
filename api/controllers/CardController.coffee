@@ -39,7 +39,14 @@ CardController =
             if error
                 res.json {error}, 500
             else
-                res.json {card}, 201
+                if card.parent
+                    Card.findOne(card.parent).done (error, parent) ->
+                        parent.children.push card.id
+                        parent.save (error) ->
+                            cards = [card, parent]
+                            res.json {cards}, 201
+                else
+                    res.json {card}, 201
 
     find: (req, res) ->
         if req.param 'id' # find one
