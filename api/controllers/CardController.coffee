@@ -29,6 +29,20 @@ queryForCards = (req, res) ->
         else
             res.json {cards}
 
+fakeRecord =
+    fake: true
+    children: []
+    save: (cb) -> cb null
+
+fakeLoad =
+    done: (cb) ->
+        cb null, fakeRecord
+
+loadParent = (parentId) ->
+    if parentId
+        Card.findOne parentId
+    else
+        fakeLoad
 
 CardController =
     _config: {}
@@ -37,18 +51,20 @@ CardController =
         card = req.param 'card'
         card.creator = req.session.username
 
-        Card.create(card).done (error, card) ->
-            if error
-                res.json {error}, 500
-            else
-                if card.parent
-                    Card.findOne(card.parent).done (error, parent) ->
-                        parent.children.push card.id
-                        parent.save (error) ->
-                            cards = [card, parent]
-                            res.json {cards}, 201
-                else
-                    res.json {card}, 201
+        loadParent(card.parent).done (error, parent) ->
+            if error then return res.json {error}, 500
+            Card.create(card).done (error, card) ->
+                if error then return res.json {error}, 500
+                parent.children.push card
+                card.columns = parent.columns if parent.columns
+                card.save (error) ->
+                    if error then return res.json {error}, 500
+                    parent.save (error) ->
+                        if error then return res.json {error}, 500
+                        if parent.fake
+                            res.json {card}, 201
+                        else
+                            res.json { cards: [ card, parent ] }, 201
 
     find: (req, res) ->
         if req.param 'id' # find one

@@ -25,5 +25,13 @@ Card =
             type: 'array'
             defaultsTo: []
 
+        columns:
+            type: 'array'
+            defaultsTo: [
+                { name: 'preparing' }
+                { name: 'doing' }
+                { name: 'verifying' }
+                { name: 'releasing' }
+            ]
 
 module.exports = Card
