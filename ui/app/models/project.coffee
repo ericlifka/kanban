@@ -6,4 +6,6 @@ Project = DS.Model.extend
     owner: DS.attr()
     topCard: DS.attr()
 
+    top: null
+
 `export default Project`

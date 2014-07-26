@@ -9,4 +9,6 @@ Card = DS.Model.extend
     parent: DS.attr()
     children: DS.attr()
 
+    cards: null
+
 `export default Card`

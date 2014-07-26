@@ -12,4 +12,8 @@ Router.map ->
         @route 'board'
         @route 'plan'
 
+    @resource 'card', { path: '/card/:card_id' }, ->
+        @route 'board'
+        @route 'plan'
+
 `export default Router`
