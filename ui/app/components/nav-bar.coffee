@@ -10,24 +10,24 @@ pages = [
 NavBarComponent = Ember.Component.extend
     activePage: null
     authenticatedBinding: 'session.authenticated'
-    lastProjectBinding: 'session.lastProject'
+    lastCardBinding: 'session.lastCard'
 
-    navigationPages: Ember.computed 'activePage', 'authenticated', 'lastProject', ->
+    navigationPages: Ember.computed 'activePage', 'authenticated', 'lastCard', ->
         authenticated = @get 'authenticated'
         active = @get 'activePage'
-        lastProject = @get 'lastProject'
+        lastCard = @get 'lastCard'
 
         descriptions = _.collect pages, (page) ->
             if page.auth and not authenticated
                 false
-            else if page.dynamic and not lastProject
+            else if page.dynamic and not lastCard
                 false
             else
                 active: page.route is active
                 display: page.display
                 dynamic: page.dynamic
                 route: page.route
-                model: if page.dynamic then lastProject else null
+                model: if page.dynamic then lastCard else null
 
         _.filter descriptions, (page) -> page
 

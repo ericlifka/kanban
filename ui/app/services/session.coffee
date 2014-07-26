@@ -2,7 +2,7 @@
 
 SessionService = Ember.Object.extend
     user: null
-    lastProject: null
+    lastCard: null
 
     authenticated: Ember.computed 'user', ->
         !!@get 'user'
@@ -11,10 +11,10 @@ SessionService = Ember.Object.extend
         authenticated = @get 'authenticated'
         username = @get 'user.username'
         if authenticated and username
-            projectId = window.localStorage?.getItem "#{username}.last_project"
-            if projectId
-                @store.find('project', projectId).then (project) =>
-                    @set 'lastProject', project
+            cardId = window.localStorage?.getItem "#{username}.last_card"
+            if cardId
+                @store.find('card', cardId).then (card) =>
+                    @set 'lastCard', card
 
     confirmSession: -> new Ember.RSVP.Promise (resolve) =>
         sessionUser = @get 'user'
@@ -67,14 +67,14 @@ SessionService = Ember.Object.extend
             console.log "Password request failed: ", xhr.status, xhr
             resolve false
 
-    changeProject: (project) ->
-        @set 'lastProject', project
-        @cacheLastProjectId()
+    changeLastCard: (card) ->
+        @set 'lastCard', card
+        @cacheLastCardId()
 
-    cacheLastProjectId: ->
-        projectId = @get 'lastProject.id'
+    cacheLastCardId: ->
+        cardId = @get 'lastCard.id'
         username = @get 'user.username'
-        if username and projectId
-            window.localStorage?.setItem "#{username}.last_project", projectId
+        if username and cardId
+            window.localStorage?.setItem "#{username}.last_card", cardId
 
 `export default SessionService`
