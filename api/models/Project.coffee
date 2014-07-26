@@ -13,6 +13,6 @@ Project =
             required: true
 
         topCard:
-            type: 'string'
+            type: 'int'
 
 module.exports = Project

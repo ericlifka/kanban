@@ -9,11 +9,11 @@ Card =
             required: true
 
         projectId:
-            type: 'string'
+            type: 'int'
             required: true
 
         parent:
-            type: 'string'
+            type: 'int'
 
         column:
             type: 'int'
