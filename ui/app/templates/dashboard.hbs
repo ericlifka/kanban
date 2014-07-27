@@ -1,19 +1,15 @@
 <div class="container">
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Your Projects</h3>
-        </div>
-        <ul class="list-group">
-            {{#each project in controller}}
-                <li class="list-group-item">
-                    <h3><a {{bind-attr href=project.kanbanHref}}>{{project.name}}</a> <small>{{project.description}}</small></h3>
-                </li>
-            {{/each}}
+    <h3><small>Your Projects</small></h3>
+    <ul class="list-group">
+        {{#each project in controller}}
             <li class="list-group-item">
-                {{new-project-control}}
+                <h4><a {{bind-attr href=project.kanbanHref}}>{{project.name}}</a>
+                    <small>{{project.description}}</small>
+                </h4>
             </li>
-        </ul>
-    </div>
-
+        {{/each}}
+        <li class="list-group-item">
+            {{new-project-control}}
+        </li>
+    </ul>
 </div>
