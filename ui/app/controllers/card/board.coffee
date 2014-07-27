@@ -1,6 +1,8 @@
 `import Ember from 'ember'`
 
 CardBoardController = Ember.ObjectController.extend
+    title: ""
+
     #TODO: server loaded columns to allow configuration
     columnDescriptions: [
         {column: 0, name: 'preparing'}
@@ -16,6 +18,14 @@ CardBoardController = Ember.ObjectController.extend
             column: description.column
             name: description.name
             cards: columnGroups[description.column]
+
+    setTitle: Ember.observer 'model.name', ->
+        cardName = @get 'model.name'
+        if cardName isnt 'topCard'
+            @set 'title', cardName
+        else
+            @store.find('project', @get 'model.projectId').then (project) =>
+                @set 'title', project.get 'name'
 
     actions:
         newCard: -> false
