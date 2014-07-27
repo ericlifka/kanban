@@ -1,6 +1,6 @@
 <h2><small>{{title}}</small></h2>
 <div class="columns row">
     {{#each column in columns}}
-        {{kanban-column column=column}}
+        {{kanban-column position=column.position description=column.description cards=column.cards}}
     {{/each}}
 </div>

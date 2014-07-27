@@ -11,13 +11,18 @@ CardBoardController = Ember.ObjectController.extend
         {column: 3, name: 'releasing'}
     ]
 
-    columns: Ember.computed 'model.cards.@each.column', ->
-        cards = @get 'model.cards'
-        columnGroups = _.groupBy cards, (card) -> card.get 'column'
-        _.collect @columnDescriptions, (description) ->
-            column: description.column
-            name: description.name
-            cards: columnGroups[description.column]
+    columns: Ember.computed 'model.cards.@each.column', 'model.columns.[]', ->
+        columnGroups = _.groupBy @get('model.cards'), (card) -> card.get 'column'
+        columns = @get 'model.columns'
+
+        for i in [0..columns.length]
+            column = columns[i]
+            cards = columnGroups[i]
+            {
+                position: i
+                description: column
+                cards: cards
+            }
 
     setTitle: Ember.observer 'model.name', ->
         cardName = @get 'model.name'

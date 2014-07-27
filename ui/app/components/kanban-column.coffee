@@ -3,12 +3,14 @@
 KanbanColumnComponent = Ember.Component.extend
     classNameBindings: [':kanban-column', 'activeColumn', ':col-sm-3']
 
-    activeColumn: false
-    nameBinding: 'column.name'
+    cards: null
+    description: null
+    position: null
 
-    cards: Ember.computed 'column.cards.@each.rank', ->
-        cards = @get 'column.cards'
-        _.sortBy cards, (card) -> card.rank
+    activeColumn: false
+
+    sortedCards: Ember.computed 'cards.@each.rank', ->
+        _.sortBy @get('cards'), (card) -> card.get 'rank'
 
     dragOver: (event) ->
         event.preventDefault()

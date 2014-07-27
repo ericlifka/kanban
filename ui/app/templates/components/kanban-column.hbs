@@ -1,9 +1,9 @@
 <div {{bind-attr class=":panel activeColumn:panel-warning:panel-default"}}>
     <div class="panel-heading">
-        <h3 class="panel-title">{{name}}</h3>
+        <h3 class="panel-title">{{description.name}}</h3>
     </div>
     <div class="panel-body">
-        {{#each card in cards}}
+        {{#each card in sortedCards}}
             {{kanban-card card=card}}
         {{/each}}
     </div>
