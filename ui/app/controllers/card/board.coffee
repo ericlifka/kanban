@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
 
 CardBoardController = Ember.ObjectController.extend
+    newCardDialogVisible: false
     title: ""
 
     columns: Ember.computed 'model.cards.@each.column', 'model.columns.[]', ->
@@ -25,6 +26,10 @@ CardBoardController = Ember.ObjectController.extend
                 @set 'title', project.get 'name'
 
     actions:
-        newCard: -> false
+        openNewCardDialog: ->
+            @set 'newCardDialogVisible', true
+
+        dismissNewCardDialog: ->
+            @set 'newCardDialogVisible', false
 
 `export default CardBoardController`

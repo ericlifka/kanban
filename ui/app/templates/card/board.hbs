@@ -1,6 +1,15 @@
-<h2><small>{{title}}</small></h2>
+<h2>
+    <small>{{title}}</small>
+    <button role="button" class="btn btn-primary" {{action "openNewCardDialog"}}>
+        Create Card
+    </button>
+</h2>
 <div class="columns row">
     {{#each column in columns}}
         {{kanban-column position=column.position description=column.description cards=column.cards}}
     {{/each}}
+</div>
+
+<div {{bind-attr class="newCardDialogVisible::hidden"}}>
+    {{new-card-dialog parent=model}}
 </div>
