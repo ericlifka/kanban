@@ -3,14 +3,6 @@
 CardBoardController = Ember.ObjectController.extend
     title: ""
 
-    #TODO: server loaded columns to allow configuration
-    columnDescriptions: [
-        {column: 0, name: 'preparing'}
-        {column: 1, name: 'doing'}
-        {column: 2, name: 'verifying'}
-        {column: 3, name: 'releasing'}
-    ]
-
     columns: Ember.computed 'model.cards.@each.column', 'model.columns.[]', ->
         columnGroups = _.groupBy @get('model.cards'), (card) -> card.get 'column'
         columns = @get 'model.columns'
