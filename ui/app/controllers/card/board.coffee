@@ -15,7 +15,7 @@ CardBoardController = Ember.ObjectController.extend
         columnGroups = _.groupBy @get('model.cards'), (card) -> card.get 'column'
         columns = @get 'model.columns'
 
-        for i in [0..columns.length]
+        for i in [0...columns.length]
             column = columns[i]
             cards = columnGroups[i]
             {
