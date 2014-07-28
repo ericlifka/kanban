@@ -16,7 +16,9 @@ KanbanColumnComponent = Ember.Component.extend
         event.preventDefault()
         @set 'activeColumn', true
 
-    dragLeave: (event) ->
+    dragLeave: (
+#        event
+    ) ->
         @set 'activeColumn', false
 
     drop: (event) ->

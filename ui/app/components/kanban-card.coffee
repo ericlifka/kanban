@@ -25,7 +25,9 @@ KanbanCardComponent = Ember.Component.extend
         if not @get 'dragging'
             @set 'activeCard', true
 
-    dragLeave: (event) ->
+    dragLeave: (
+#        event
+    ) ->
         @set 'activeCard', false
 #        event.preventDefault()
 
@@ -33,7 +35,9 @@ KanbanCardComponent = Ember.Component.extend
         @set 'dragging', true
         event.dataTransfer.setData 'card', @get 'card.id'
 
-    dragEnd: (event) ->
+    dragEnd: (
+#        event
+    ) ->
         @set 'dragging', false
 
 `export default KanbanCardComponent`
