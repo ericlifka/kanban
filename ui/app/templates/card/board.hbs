@@ -10,6 +10,6 @@
     {{/each}}
 </div>
 
-<div {{bind-attr class="newCardDialogVisible::hidden"}}>
+{{#if newCardDialogVisible}}
     {{new-card-dialog parent=model}}
-</div>
+{{/if}}

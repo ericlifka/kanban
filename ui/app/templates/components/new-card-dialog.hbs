@@ -7,16 +7,6 @@
 
             <form class="form-horizontal" {{action "create" on="submit"}}>
 
-                {{#if registrationError}}
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div class="alert alert-danger" role="alert">
-                                {{{registrationError}}}
-                            </div>
-                        </div>
-                    </div>
-                {{/if}}
-
                 <div {{bind-attr class=":form-group usernameError:has-error usernameError:has-feedback"}}>
                     <label for="signup-username" class="col-sm-5 control-label">Username</label>
 
