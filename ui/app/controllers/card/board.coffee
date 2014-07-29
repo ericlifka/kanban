@@ -10,13 +10,9 @@ CardBoardController = Ember.ObjectController.extend
         columns = @get 'model.columns'
 
         for i in [0...columns.length]
-            column = columns[i]
-            cards = columnGroups[i]
-            {
-                position: i
-                description: column
-                cards: cards
-            }
+            position: i
+            description: columns[i]
+            cards: columnGroups[i]
 
     setTitle: Ember.observer 'model.name', ->
         cardName = @get 'model.name'

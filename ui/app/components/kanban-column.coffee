@@ -3,9 +3,9 @@
 KanbanColumnComponent = Ember.Component.extend
     classNameBindings: [':kanban-column', 'activeColumn', ':col-sm-3']
 
-    cards: null
-    description: null
     position: null
+    description: null
+    cards: null
 
     activeColumn: false
 
@@ -28,10 +28,11 @@ KanbanColumnComponent = Ember.Component.extend
         draggedCard = @store.getById 'card', draggedCardId
         droppedCard = @store.getById 'card', droppedOnId
         #TODO do something with rankings to make cards ordered or something
-        draggedCard.set 'column', @get 'column.column'
+        draggedCard.set 'column', @get 'position'
+        console.log draggedCard
         draggedCard.save()
 
-        console.log 'drop on column', @get 'column.name'
+        console.log 'drop on column', @get 'description.name'
         console.log event.someProperty
         @set 'activeColumn', false
 #        cardId = event.dataTransfer.getData 'card'
