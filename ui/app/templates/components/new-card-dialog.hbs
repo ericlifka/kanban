@@ -1,54 +1,45 @@
-<div class="new-card-dialog">
-    <div class="row">
-        <div class="new-card-form col-md-offset-3 col-md-6">
-            <h1>
-                <small>New Card</small>
-            </h1>
+<div class="row">
+    <div class="new-card-form col-md-offset-3 col-md-6">
+        <h1>
+            <small>New Card</small>
+        </h1>
 
-            <form class="form-horizontal" {{action "create" on="submit"}}>
-
-                <div {{bind-attr class=":form-group usernameError:has-error usernameError:has-feedback"}}>
-                    <label for="signup-username" class="col-sm-5 control-label">Username</label>
-
-                    <div class="col-sm-7">
-                        {{input type="text" class="form-control first-input" id="signup-username2" placeholder="username" value=registrationUsername}}
-                        {{#if usernameError}}
-                            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-                        {{/if}}
-                    </div>
-                </div>
-
-                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error hasFeedback"}}>
-                    <label for="signup-password" class="col-sm-5 control-label">Password</label>
-
-                    <div class="col-sm-7">
-                        {{input type="password" class="form-control" id="signup-password2" placeholder="password" value=registrationPassword}}
-                        {{#if passwordWarning}}
-                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-                        {{/if}}
-                    </div>
-                </div>
-
-                <div {{bind-attr class=":form-group passwordWarning:has-warning passwordError:has-error hasFeedback"}}>
-                    <label for="signup-password-repeat" class="col-sm-5 control-label">Re-enter Password</label>
-
-                    <div class="col-sm-7">
-                        {{input type="password" class="form-control" id="signup-password-repeat2" placeholder="re-enter password" value=passwordRepeat}}
-                        {{#if passwordWarning}}
-                            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-                        {{/if}}
-                    </div>
-                </div>
-
+        <form class="form-horizontal" {{action "create" on="submit"}}>
+            {{#if creationError}}
                 <div class="form-group">
-                    <div class="col-sm-offset-5 col-sm-7">
-                        <button type="submit" class="btn btn-default">Sign Up</button>
-                        <button type="button" class="btn btn-link" {{action "dismissNewCardDialog" target=parentView.controller}}>
-                            Cancel
-                        </button>
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Error!</strong> Couldn't create the card
                     </div>
                 </div>
-            </form>
-        </div>
+            {{/if}}
+
+            <div {{bind-attr class=":form-group validationError:has-error validationError:has-feedback"}}>
+                <label for="name-input" class="control-label col-sm-3">Card Name</label>
+
+                <div class="col-sm-9">
+                    {{input type="text" class="form-control first-input" id="name-input" placeholder="name" value=name}}
+                    {{#if validationError}}
+                        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description-input" class="control-label col-sm-3">Description</label>
+
+                <div class="col-sm-9">
+                    {{textarea value=description id="description-input" class="form-control" placeholder="description" rows="5"}}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-link" {{action "close"}}>
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
