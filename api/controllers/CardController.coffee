@@ -55,7 +55,7 @@ CardController =
             if error then return res.json {error}, 500
             Card.create(card).done (error, card) ->
                 if error then return res.json {error}, 500
-                parent.children.push card
+                parent.children.push card.id
                 card.columns = parent.columns if parent.columns
                 card.save (error) ->
                     if error then return res.json {error}, 500
