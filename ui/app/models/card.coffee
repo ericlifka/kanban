@@ -8,8 +8,8 @@ Card = DS.Model.extend
     column: DS.attr()
     rank: DS.attr()
 
-    parent: DS.attr()
-    children: DS.attr()
+    parent: DS.belongsTo 'card', { async: true }
+    children: DS.hasMany 'card', { async: true }
     columns: DS.attr()
 
     creator: DS.attr()
