@@ -2,6 +2,8 @@
 
 Card = DS.Model.extend
     name: DS.attr()
+    description: DS.attr()
+    comments: DS.attr()
 
     column: DS.attr()
     rank: DS.attr()

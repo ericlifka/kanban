@@ -1,30 +1,14 @@
 Card =
     attributes:
-        name:
-            type: 'string'
-            required: true
+        name: { type: 'string', required: true }
+        description: { type: 'string' }
+        comments: { type: 'array', defaultsTo: [] }
 
-        creator:
-            type: 'string'
-            required: true
+        column: { type: 'int' }
+        rank: { type: 'int' }
 
-        projectId:
-            type: 'int'
-            required: true
-
-        parent:
-            type: 'int'
-
-        column:
-            type: 'int'
-
-        rank:
-            type: 'int'
-
-        children:
-            type: 'array'
-            defaultsTo: []
-
+        parent: { type: 'int' }
+        children: { type: 'array', defaultsTo: [] }
         columns:
             type: 'array'
             defaultsTo: [
@@ -33,5 +17,8 @@ Card =
                 { name: 'verifying' }
                 { name: 'releasing' }
             ]
+
+        creator: { type: 'string', required: true }
+        projectId: { type: 'int', required: true }
 
 module.exports = Card
