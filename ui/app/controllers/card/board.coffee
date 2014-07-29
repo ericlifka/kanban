@@ -4,8 +4,9 @@ CardBoardController = Ember.ObjectController.extend
     newCardDialogVisible: false
     title: ""
 
-    columns: Ember.computed 'model.cards.@each.column', 'model.columns.[]', ->
-        columnGroups = _.groupBy @get('model.cards'), (card) -> card.get 'column'
+    columns: Ember.computed 'model.children.@each.column', 'model.columns.[]', ->
+        children = @get('model.children').toArray()
+        columnGroups = _.groupBy children, (card) -> card.get 'column'
         columns = @get 'model.columns'
 
         for i in [0...columns.length]

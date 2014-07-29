@@ -8,13 +8,11 @@ Card = DS.Model.extend
     column: DS.attr()
     rank: DS.attr()
 
-    parent: DS.belongsTo 'card', { async: true }
-    children: DS.hasMany 'card', { async: true }
+    parent: DS.belongsTo 'card', { inverse: 'children', async: true }
+    children: DS.hasMany 'card', { inverse: 'parent', async: true }
     columns: DS.attr()
 
     creator: DS.attr()
     projectId: DS.attr()
-
-    cards: null
 
 `export default Card`
