@@ -6,10 +6,12 @@ NewCardDialogComponent = Ember.Component.extend FocusFirstInputMixin,
 
     actions:
         create: ->
+            parentModel = @get 'parent'
+
             name = @get 'name'
             description = @get 'description'
-            parent = @get 'parent.id'
-            projectId = @get 'parent.projectId'
+            parent = parentModel.get 'id'
+            projectId = parentModel.get 'projectId'
             column = 0
 
             if not name
@@ -18,6 +20,7 @@ NewCardDialogComponent = Ember.Component.extend FocusFirstInputMixin,
             cardDefinition = {name, description, parent, projectId, column}
             newCard = @store.createRecord 'card', cardDefinition
             newCard.save().then( =>
+                parentModel.cards.pushObject newCard
                 @sendAction()
             ).catch =>
                 newCard.deleteRecord()
