@@ -1,6 +1,7 @@
 `import Ember from 'ember'`
+`import DragDropDelegateMixin from '../../mixins/drag-drop-delegate'`
 
-CardBoardController = Ember.ObjectController.extend
+CardBoardController = Ember.ObjectController.extend DragDropDelegateMixin,
     newCardDialogVisible: false
     title: ""
 
@@ -21,42 +22,6 @@ CardBoardController = Ember.ObjectController.extend
         else
             @store.find('project', @get 'model.projectId').then (project) =>
                 @set 'title', project.get 'name'
-
-    startDraggingCard: (component) ->
-        component.set 'dragging', true
-        @set 'cardBeingDragged', component
-
-    dragOverCard: (component) ->
-        if not component.get 'dragging'
-            if @get 'activeCardComponent'
-                @set 'activeCardComponent.activeCard', false
-
-            component.set 'activeCard', true
-            @set 'activeCardComponent', component
-
-    dragOverColumn: (component) ->
-        if @get 'activeColumnComponent'
-            @set 'activeColumnComponent.activeColumn', false
-
-        component.set 'activeColumn', true
-        @set 'activeColumnComponent', component
-
-    dropOnCard: (component) ->
-
-    dropOnColumn: (component) ->
-
-    stopDraggingCard: (component) ->
-        if @get 'activeColumnComponent'
-            @set 'activeColumnComponent.activeColumn', false
-            @set 'activeColumnComponent', null
-
-        if @get 'activeCardComponent'
-            @set 'activeCardComponent.activeCard', false
-            @set 'activeCardComponent', null
-
-        if @get 'cardBeingDragged'
-            @set 'cardBeingDragged.dragging', false
-            @set 'cardBeingDragged', null
 
     actions:
         openNewCardDialog: ->
