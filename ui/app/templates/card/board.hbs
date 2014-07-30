@@ -6,7 +6,7 @@
 </h2>
 <div class="columns row">
     {{#each column in columns}}
-        {{kanban-column position=column.position description=column.description cards=column.cards}}
+        {{kanban-column position=column.position description=column.description cards=column.cards delegate=controller}}
     {{/each}}
 </div>
 

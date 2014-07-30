@@ -8,36 +8,38 @@ KanbanCardComponent = Ember.Component.extend
     nameBinding: 'card.name'
     activeCard: false
     dragging: false
+    delegate: null
 
     drop: (event) ->
-        cardId = event.dataTransfer.getData 'card'
-        if cardId is @get 'card.id'
-            event.stopPropagation()
-            return # didn't move card at all
+        event.stopPropagation()
+        @delegate.dropOnCard @
 
-        event.droppedOnId = @get 'card.id'
-
-        console.log 'dropped ', cardId, ' on ', @get 'card.id'
-        @set 'activeCard', false
+#        cardId = event.dataTransfer.getData 'card'
+#        if cardId is @get 'card.id'
+#            event.stopPropagation()
+#            return # didn't move card at all
+#
+#        event.droppedOnId = @get 'card.id'
+#
+#        console.log 'dropped ', cardId, ' on ', @get 'card.id'
+#        @set 'activeCard', false
 
     dragOver: (event) ->
         event.preventDefault()
-        if not @get 'dragging'
-            @set 'activeCard', true
+        @delegate.dragOverCard @
 
-    dragLeave: (
-#        event
-    ) ->
-        @set 'activeCard', false
-#        event.preventDefault()
+#        if not @get 'dragging'
+#            @set 'activeCard', true
 
     dragStart: (event) ->
-        @set 'dragging', true
-        event.dataTransfer.setData 'card', @get 'card.id'
+        event.stopPropagation()
+        @delegate.startDraggingCard @
 
-    dragEnd: (
-#        event
-    ) ->
-        @set 'dragging', false
+#        @set 'dragging', true
+#        event.dataTransfer.setData 'card', @get 'card.id'
+
+    dragEnd: (event) ->
+        event.stopPropagation()
+        @delegate.stopDraggingCard @
 
 `export default KanbanCardComponent`
