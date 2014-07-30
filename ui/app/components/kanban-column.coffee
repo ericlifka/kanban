@@ -8,7 +8,7 @@ KanbanColumnComponent = Ember.Component.extend
     description: null
     cards: null
 
-    activeColumn: false
+    active: false
 
     sortedCards: Ember.computed 'cards.@each.rank', ->
         _.sortBy @get('cards'), (card) -> card.get 'rank'
