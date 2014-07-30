@@ -6,6 +6,8 @@
         {{#each card in sortedCards}}
             {{kanban-card card=card delegate=delegate}}
         {{/each}}
-        {{column-bottom-dropzone delegate=delegate}}
+        <div {{bind-attr class="bottomZoneActive::hidden"}}>
+            {{column-bottom-dropzone delegate=delegate}}
+        </div>
     </div>
 </div>

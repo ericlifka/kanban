@@ -8,15 +8,25 @@ DragDropDelegateMixin = Ember.Mixin.create
     dragOverCard: (component) ->
         if not component.get 'dragging'
             @clearCard()
+            @clearWell()
 
             component.set 'active', true
             @set 'activeCard', component
+
+            @set 'activeColumn.bottomZoneActive', false
 
     dragOverColumn: (component) ->
         @clearColumn()
 
         component.set 'activeColumn', true
+        component.set 'bottomZoneActive', true
         @set 'activeColumn', component
+
+    dragOverBottomWell: (component) ->
+        @clearCard()
+        
+        component.set 'active', true
+        @set 'activeWell', component
 
     dropOnCard: (component) ->
 
@@ -25,6 +35,7 @@ DragDropDelegateMixin = Ember.Mixin.create
     stopDraggingCard: (component) ->
         @clearColumn()
         @clearCard()
+        @clearWell()
         @clearDragging()
 
 
@@ -32,12 +43,18 @@ DragDropDelegateMixin = Ember.Mixin.create
     clearColumn: ->
         if @get 'activeColumn'
             @set 'activeColumn.active', false
+            @set 'activeColumn.bottomZoneActive', false
             @set 'activeColumn', null
 
     clearCard: ->
         if @get 'activeCard'
             @set 'activeCard.active', false
             @set 'activeCard', null
+
+    clearWell: ->
+        if @get 'activeWell'
+            @set 'activeWell.active', false
+            @set 'activeWell', null
 
     clearDragging: ->
         if @get 'draggingCard'
