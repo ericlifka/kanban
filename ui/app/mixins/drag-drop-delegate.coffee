@@ -18,6 +18,9 @@ DragDropDelegateMixin = Ember.Mixin.create
     dragOverColumn: (component) ->
         @clearColumn()
 
+        if component.get('position') isnt @get('activeCard.card.column')
+            @clearCard()
+
         component.set 'active', true
         component.set 'bottomZoneActive', true
         @set 'activeColumn', component

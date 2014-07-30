@@ -5,8 +5,8 @@ Card = DS.Model.extend
     description: DS.attr()
     comments: DS.attr()
 
-    column: DS.attr()
-    rank: DS.attr()
+    column: DS.attr('number')
+    rank: DS.attr('number')
 
     parent: DS.belongsTo 'card', { inverse: 'children', async: true }
     children: DS.hasMany 'card', { inverse: 'parent', async: true }
