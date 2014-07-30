@@ -5,8 +5,10 @@ ColumnBottomDropzoneComponent = Ember.Component.extend
     active: false
 
     dragOver: (event) ->
-        console.log("drag over well")
         event.preventDefault()
         @delegate.dragOverBottomWell @
+
+    drop: (event) ->
+        @delegate.dropOnWell @
 
 `export default ColumnBottomDropzoneComponent`

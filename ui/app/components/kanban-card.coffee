@@ -11,7 +11,6 @@ KanbanCardComponent = Ember.Component.extend
     delegate: null
 
     drop: (event) ->
-        event.stopPropagation()
         @delegate.dropOnCard @
 
 #        cardId = event.dataTransfer.getData 'card'

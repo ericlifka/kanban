@@ -29,8 +29,13 @@ DragDropDelegateMixin = Ember.Mixin.create
         @set 'activeWell', component
 
     dropOnCard: (component) ->
+        console.log "card: #{component.get('card.name')}"
 
     dropOnColumn: (component) ->
+        console.log "column: #{component.get('description.name')}"
+
+    dropOnWell: (component) ->
+        console.log "drop well: #{component.get('column')}"
 
     stopDraggingCard: (component) ->
         @clearColumn()
