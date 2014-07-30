@@ -1,7 +1,7 @@
 `import Ember from 'ember'`
 
 KanbanCardComponent = Ember.Component.extend
-    classNameBindings: [':kanban-card', 'activeCard']
+    classNameBindings: [':kanban-card', 'active:active-card']
     attributeBindings: ['draggable']
 
     draggable: "true"
