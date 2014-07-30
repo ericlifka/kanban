@@ -24,7 +24,7 @@ DragDropDelegateMixin = Ember.Mixin.create
 
     dragOverBottomWell: (component) ->
         @clearCard()
-        
+
         component.set 'active', true
         @set 'activeWell', component
 
