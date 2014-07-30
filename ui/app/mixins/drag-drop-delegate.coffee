@@ -7,15 +7,13 @@ DragDropDelegateMixin = Ember.Mixin.create
 
     dragOverCard: (component) ->
         if not component.get 'dragging'
-            if @get 'activeCard'
-                @set 'activeCard.active', false
+            @clearCard()
 
             component.set 'active', true
             @set 'activeCard', component
 
     dragOverColumn: (component) ->
-        if @get 'activeColumn'
-            @set 'activeColumn.active', false
+        @clearColumn()
 
         component.set 'activeColumn', true
         @set 'activeColumn', component
@@ -25,14 +23,23 @@ DragDropDelegateMixin = Ember.Mixin.create
     dropOnColumn: (component) ->
 
     stopDraggingCard: (component) ->
+        @clearColumn()
+        @clearCard()
+        @clearDragging()
+
+
+    # Helpers
+    clearColumn: ->
         if @get 'activeColumn'
             @set 'activeColumn.active', false
             @set 'activeColumn', null
 
+    clearCard: ->
         if @get 'activeCard'
             @set 'activeCard.active', false
             @set 'activeCard', null
 
+    clearDragging: ->
         if @get 'draggingCard'
             @set 'draggingCard.dragging', false
             @set 'draggingCard', null
